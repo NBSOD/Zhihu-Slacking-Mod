@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         知乎极简沉浸 - 纯净阅读与摸鱼防窥版
+// @name         知乎极简沉浸纯净阅读与摸鱼防窥版-个人修改版
 // @namespace    https://greasyfork.org/users/zhihu-minimal-stealth
-// @version      6.1.1-mod
-// @description  [个人修改版] 基于原作者 v6.1.1：宽屏自适应(1100px)、仅保留 Esc 老板键。全站去顶栏/侧栏/广告/看山/操作条；彻底消灭丑陋白底骨架屏；回答时间自动置顶；问答页黑底白字平铺；消灭知乎页签图标；评论详情与楼中楼弹窗全黑夜化；顶部极简搜索栏；图片模糊防窥；右侧4浮钮；配备1:1像素级高保真VS Code代码编辑器全屏掩护（按Esc或点击>_键触发）
-// @author       You
+// @version      1.0.0
+// @description  基于原脚本「知乎极简沉浸 - 纯净阅读与摸鱼防窥版」改写：宽屏自适应(1100px)、仅保留 Esc 老板键。全站去顶栏/侧栏/广告/看山/操作条；彻底消灭丑陋白底骨架屏；回答时间自动置顶；问答页黑底白字平铺；消灭知乎页签图标；评论详情与楼中楼弹窗全黑夜化；顶部极简搜索栏；图片模糊防窥；右侧4浮钮；配备1:1像素级高保真VS Code代码编辑器全屏掩护
+// @author       Suepr_FFF
 // @match        https://www.zhihu.com/*
 // @match        https://zhuanlan.zhihu.com/*
 // @icon         data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23999"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="%23666"/></svg>
@@ -21,8 +21,8 @@
  *   原始地址: https://greasyfork.org/zh-CN/scripts/594124
  *   原始版本: v6.1.1
  *
- * 修改版 Copyright (c) 2026 NBSOD (KevinZ)
- *   修改内容: 宽屏自适应(1100px)、精简键盘快捷键仅保留 Esc
+ * 修改版 Copyright (c) 2026 Suepr_FFF
+ *   修改内容: 宽屏自适应(1100px)、精简键盘快捷键仅保留 Esc、重新编排版本号
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
