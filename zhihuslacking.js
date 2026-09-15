@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         知乎极简沉浸纯净阅读与摸鱼防窥版-个人修改版
 // @namespace    https://github.com/NBSOD/Zhihu-Slacking-Mod
-// @version      1.0.1
-// @description  基于原脚本「知乎极简沉浸 - 纯净阅读与摸鱼防窥版」改写：宽屏自适应(1100px)、仅保留 Esc 老板键。全站去顶栏/侧栏/广告/看山/操作条；彻底消灭丑陋白底骨架屏；回答时间自动置顶；问答页黑底白字平铺；消灭知乎页签图标；评论详情与楼中楼弹窗全黑夜化；顶部极简搜索栏；图片模糊防窥；右侧4浮钮；配备1:1像素级高保真VS Code代码编辑器全屏掩护
+// @version      1.0.2
+// @description  基于原脚本「知乎极简沉浸 - 纯净阅读与摸鱼防窥版」改写：宽屏自适应(1100px)、仅保留 Esc 老板键。全站去顶栏/侧栏/广告/看山/操作条；彻底消灭丑陋白底骨架屏；回答时间自动置顶；问答页黑底白字平铺；消灭知乎页签图标；评论详情与楼中楼弹窗全黑夜化；顶部极简搜索栏；图片模糊防窥；右侧4浮钮；配备技术文档全屏伪装（按Esc或点击>_键触发）
 // @author       Suepr_FFF, Deepseek-v4-Pro
 // @match        https://www.zhihu.com/*
 // @match        https://zhuanlan.zhihu.com/*
@@ -806,17 +806,17 @@
     html.zh-dark-mode .zh-guide-item kbd { background: #282d34 !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; color: #79c0ff !important; box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.4) !important; }
     .zh-guide-tip { font-size: 11px !important; opacity: 0.6 !important; margin-top: 8px !important; text-align: center !important; }
 
-    /* === 15. 1:1 像素级高保真 VS Code 代码编辑器全屏伪装 === */
+    /* === 15. 技术文档全屏伪装页面（老板键） === */
     #zh-boss-mask {
       position: fixed !important;
       top: 0 !important;
       left: 0 !important;
       width: 100vw !important;
       height: 100vh !important;
-      background: #1e1e1e !important;
-      color: #d4d4d4 !important;
-      font-family: Consolas, "Fira Code", Menlo, Monaco, "Courier New", monospace !important;
-      font-size: 13.5px !important;
+      background: #f5f6f7 !important;
+      color: #2d2e30 !important;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+      font-size: 15px !important;
       box-sizing: border-box !important;
       z-index: 99999999 !important;
       display: none;
@@ -826,23 +826,164 @@
       cursor: default !important;
     }
 
-    .vsc-tab-bar { display: flex !important; height: 35px !important; background: #252526 !important; align-items: flex-end !important; border-bottom: 1px solid #1e1e1e !important; flex-shrink: 0 !important; }
-    .vsc-tab { height: 34px !important; display: flex !important; align-items: center !important; padding: 0 16px !important; font-size: 12.5px !important; color: #969696 !important; background: #2d2d2d !important; border-right: 1px solid #252526 !important; gap: 8px !important; cursor: pointer !important; }
-    .vsc-tab.active { background: #1e1e1e !important; color: #ffffff !important; border-top: 1px solid #007acc !important; }
-    .vsc-tab .close-icon { font-size: 12px !important; opacity: 0.6 !important; margin-left: 4px !important; }
-    .vsc-breadcrumb { height: 22px !important; display: flex !important; align-items: center !important; padding: 0 16px !important; font-size: 11.5px !important; color: #8c8c8c !important; background: #1e1e1e !important; gap: 6px !important; border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important; flex-shrink: 0 !important; }
-    .vsc-editor-body { flex: 1 !important; display: flex !important; overflow: hidden !important; background: #1e1e1e !important; line-height: 20px !important; }
-    .vsc-gutter { width: 52px !important; background: #1e1e1e !important; border-right: 1px solid rgba(255, 255, 255, 0.04) !important; padding: 10px 0 !important; text-align: right !important; color: #858585 !important; user-select: none !important; font-size: 13px !important; line-height: 20px !important; padding-right: 12px !important; flex-shrink: 0 !important; }
-    .vsc-code-content { flex: 1 !important; padding: 10px 16px !important; overflow-y: auto !important; white-space: pre !important; font-size: 13.5px !important; line-height: 20px !important; }
-    .syn-kwd { color: #569cd6 !important; }
-    .syn-ann { color: #dcdcaa !important; }
-    .syn-cls { color: #4ec9b0 !important; }
-    .syn-fn  { color: #dcdcaa !important; }
-    .syn-str { color: #ce9178 !important; }
-    .syn-cmt { color: #6a9955 !important; }
-    .syn-var { color: #9cdcfe !important; }
-    .vsc-status-bar { height: 22px !important; background: #007acc !important; color: #ffffff !important; display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 10px !important; font-size: 12px !important; flex-shrink: 0 !important; }
-    .vsc-status-left, .vsc-status-right { display: flex !important; align-items: center !important; gap: 14px !important; }
+    .doc-header {
+      height: 52px !important;
+      background: linear-gradient(135deg, #1a56db, #1e40af) !important;
+      color: #ffffff !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 0 24px !important;
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      flex-shrink: 0 !important;
+      gap: 10px !important;
+    }
+    .doc-header .doc-logo {
+      width: 24px !important; height: 24px !important;
+      background: rgba(255,255,255,0.2) !important;
+      border-radius: 4px !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      font-size: 13px !important;
+    }
+    .doc-breadcrumb {
+      height: 36px !important;
+      background: #ffffff !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 0 24px !important;
+      font-size: 13px !important;
+      color: #6b7280 !important;
+      border-bottom: 1px solid #e5e7eb !important;
+      flex-shrink: 0 !important;
+      gap: 6px !important;
+    }
+    .doc-breadcrumb span { color: #374151 !important; }
+
+    .doc-body { flex: 1 !important; display: flex !important; overflow: hidden !important; }
+
+    .doc-sidebar {
+      width: 220px !important;
+      background: #ffffff !important;
+      border-right: 1px solid #e5e7eb !important;
+      padding: 16px 0 !important;
+      overflow-y: auto !important;
+      flex-shrink: 0 !important;
+    }
+    .doc-sidebar .doc-nav-title {
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      color: #9ca3af !important;
+      text-transform: uppercase !important;
+      padding: 4px 20px 8px !important;
+      letter-spacing: 0.5px !important;
+    }
+    .doc-sidebar .doc-nav-item {
+      padding: 6px 20px !important;
+      font-size: 13.5px !important;
+      color: #4b5563 !important;
+      cursor: default !important;
+      line-height: 20px !important;
+    }
+    .doc-sidebar .doc-nav-item.active {
+      background: #eff6ff !important;
+      color: #1d4ed8 !important;
+      font-weight: 500 !important;
+      border-right: 3px solid #1d4ed8 !important;
+    }
+
+    .doc-content {
+      flex: 1 !important;
+      background: #ffffff !important;
+      margin: 20px !important;
+      border-radius: 8px !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+      padding: 40px 48px !important;
+      overflow-y: auto !important;
+      line-height: 1.8 !important;
+    }
+    .doc-content h1 {
+      font-size: 26px !important;
+      font-weight: 700 !important;
+      color: #111827 !important;
+      margin: 0 0 8px 0 !important;
+      padding-bottom: 12px !important;
+      border-bottom: 2px solid #e5e7eb !important;
+    }
+    .doc-content .doc-meta {
+      font-size: 13px !important;
+      color: #9ca3af !important;
+      margin-bottom: 28px !important;
+      display: flex !important;
+      gap: 20px !important;
+    }
+    .doc-content h2 {
+      font-size: 19px !important;
+      font-weight: 600 !important;
+      color: #1f2937 !important;
+      margin: 32px 0 12px 0 !important;
+    }
+    .doc-content h3 {
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      color: #374151 !important;
+      margin: 24px 0 8px 0 !important;
+    }
+    .doc-content p {
+      color: #4b5563 !important;
+      margin: 10px 0 !important;
+    }
+    .doc-content .doc-code-block {
+      background: #1e293b !important;
+      color: #e2e8f0 !important;
+      border-radius: 6px !important;
+      padding: 16px 20px !important;
+      font-family: "Fira Code", Consolas, monospace !important;
+      font-size: 13.5px !important;
+      line-height: 1.7 !important;
+      margin: 14px 0 !important;
+      overflow-x: auto !important;
+      white-space: pre !important;
+    }
+    .doc-content .doc-table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      margin: 14px 0 !important;
+      font-size: 13.5px !important;
+    }
+    .doc-content .doc-table th {
+      background: #f9fafb !important;
+      color: #374151 !important;
+      font-weight: 600 !important;
+      padding: 10px 14px !important;
+      text-align: left !important;
+      border-bottom: 2px solid #e5e7eb !important;
+    }
+    .doc-content .doc-table td {
+      padding: 9px 14px !important;
+      border-bottom: 1px solid #f3f4f6 !important;
+      color: #4b5563 !important;
+    }
+    .doc-content .doc-note {
+      background: #f0f9ff !important;
+      border-left: 4px solid #3b82f6 !important;
+      padding: 12px 16px !important;
+      border-radius: 4px !important;
+      margin: 14px 0 !important;
+      color: #1e40af !important;
+      font-size: 13.5px !important;
+    }
+
+    .doc-footer {
+      height: 32px !important;
+      background: #f9fafb !important;
+      border-top: 1px solid #e5e7eb !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 0 24px !important;
+      font-size: 12px !important;
+      color: #9ca3af !important;
+      flex-shrink: 0 !important;
+    }
   `;
 
   if (typeof GM_addStyle !== 'undefined') {
@@ -854,7 +995,7 @@
   }
 
   // 2. 标签栏 Title 与 彻底消灭知乎 Favicon
-  const fakeTitle = '项目微服务架构设计与接口调试指南 - 文档中心';
+  const fakeTitle = '企业级网络架构运维技术手册 - 内部文档';
   document.title = fakeTitle;
   try {
     Object.defineProperty(document, 'title', {
@@ -1094,71 +1235,94 @@
     if (document.getElementById('zh-boss-mask')) return;
     const mask = document.createElement('div');
     mask.id = 'zh-boss-mask';
-    const lineNumbers = Array.from({ length: 36 }, (_, i) => i + 1).join('<br/>');
 
     mask.innerHTML = `
-      <div class="vsc-tab-bar">
-        <div class="vsc-tab active"><span style="color: #e5a824;">☕</span> GatewaySecurityConfig.java <span class="close-icon">×</span></div>
-        <div class="vsc-tab"><span style="color: #6a9955;">⚙</span> application-prod.yml <span class="close-icon">×</span></div>
-        <div class="vsc-tab"><span style="color: #e5a824;">☕</span> AuthReactiveFilter.java <span class="close-icon">×</span></div>
+      <div class="doc-header">
+        <div class="doc-logo">D</div>
+        内部文档中心
       </div>
-      <div class="vsc-breadcrumb">
-        <span>gateway-cluster</span> › <span>src</span> › <span>main</span> › <span>java</span> › <span>com</span> › <span>arch</span> › <span>gateway</span> › <span>config</span> › <span>GatewaySecurityConfig.java</span> › <span>filterChain</span>
+      <div class="doc-breadcrumb">
+        首页 › <span>网络架构</span> › <span>路由协议</span> › <span>BGP路由协议与网络高可用架构设计</span>
       </div>
-      <div class="vsc-editor-body">
-        <div class="vsc-gutter">${lineNumbers}</div>
-        <div class="vsc-code-content"><span class="syn-kwd">package</span> com.arch.gateway.config;
-
-<span class="syn-kwd">import</span> org.springframework.context.annotation.Bean;
-<span class="syn-kwd">import</span> org.springframework.context.annotation.Configuration;
-<span class="syn-kwd">import</span> org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
-<span class="syn-kwd">import</span> org.springframework.security.config.web.server.ServerHttpSecurity;
-<span class="syn-kwd">import</span> org.springframework.security.web.server.SecurityWebFilterChain;
-<span class="syn-kwd">import</span> org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
-<span class="syn-kwd">import</span> reactor.core.publisher.Mono;
-
-<span class="syn-cmt">/**
- * Core Microservice Reactive Security & Access Control Configuration.
- * High-throughput non-blocking filter chain for RPC/HTTP dispatch.
- */</span>
-<span class="syn-ann">@Configuration</span>
-<span class="syn-ann">@EnableWebFluxSecurity</span>
-<span class="syn-kwd">public class</span> <span class="syn-cls">GatewaySecurityConfig</span> {
-
-    <span class="syn-kwd">private static final</span> <span class="syn-cls">String</span>[] <span class="syn-var">EXCLUDED_PATHS</span> = {
-        <span class="syn-str">"/api/v1/auth/**"</span>,
-        <span class="syn-str">"/actuator/health"</span>,
-        <span class="syn-str">"/swagger-ui.html"</span>
-    };
-
-    <span class="syn-ann">@Bean</span>
-    <span class="syn-kwd">public</span> <span class="syn-cls">SecurityWebFilterChain</span> <span class="syn-fn">filterChain</span>(<span class="syn-cls">ServerHttpSecurity</span> <span class="syn-var">http</span>) {
-        <span class="syn-kwd">return</span> <span class="syn-var">http</span>
-            .<span class="syn-fn">csrf</span>(<span class="syn-cls">ServerHttpSecurity.CsrfSpec</span>::<span class="syn-fn">disable</span>)
-            .<span class="syn-fn">securityContextRepository</span>(<span class="syn-cls">NoOpServerSecurityContextRepository</span>.<span class="syn-fn">getInstance</span>())
-            .<span class="syn-fn">authorizeExchange</span>(<span class="syn-var">exchanges</span> -&gt; <span class="syn-var">exchanges</span>
-                .<span class="syn-fn">pathMatchers</span>(<span class="syn-var">EXCLUDED_PATHS</span>).<span class="syn-fn">permitAll</span>()
-                .<span class="syn-fn">pathMatchers</span>(<span class="syn-str">"/api/v1/admin/**"</span>).<span class="syn-fn">hasAuthority</span>(<span class="syn-str">"SCOPE_admin"</span>)
-                .<span class="syn-fn">anyExchange</span>().<span class="syn-fn">authenticated</span>()
-            )
-            .<span class="syn-fn">oauth2ResourceServer</span>(<span class="syn-cls">ServerHttpSecurity.OAuth2ResourceServerSpec</span>::<span class="syn-fn">jwt</span>)
-            .<span class="syn-fn">build</span>();
-    }
-}</div>
-      </div>
-      <div class="vsc-status-bar">
-        <div class="vsc-status-left">
-          <span>⎇ main*</span>
-          <span>0 ⨂  0 ⚠️</span>
+      <div class="doc-body">
+        <div class="doc-sidebar">
+          <div class="doc-nav-title">文档导航</div>
+          <div class="doc-nav-item active">BGP路由协议概述</div>
+          <div class="doc-nav-item">协议基础与工作原理</div>
+          <div class="doc-nav-item">AS路径与路由策略</div>
+          <div class="doc-nav-item">高可用架构设计</div>
+          <div class="doc-nav-item">故障切换与收敛</div>
+          <div class="doc-nav-item">运维监控最佳实践</div>
+          <div class="doc-nav-item">附录：配置参考</div>
         </div>
-        <div class="vsc-status-right">
-          <span>Ln 28, Col 24</span>
-          <span>Spaces: 4</span>
-          <span>UTF-8</span>
-          <span>LF</span>
-          <span>Java</span>
-          <span>Prettier</span>
+        <div class="doc-content">
+          <h1>BGP路由协议与网络高可用架构设计</h1>
+          <div class="doc-meta">
+            <span>作者：网络架构组</span>
+            <span>更新日期：2026-09-15</span>
+            <span>版本：v3.2.0</span>
+            <span>密级：内部公开</span>
+          </div>
+
+          <h2>一、协议概述</h2>
+          <p>BGP（Border Gateway Protocol，边界网关协议）是互联网核心路由协议，运行在自治系统（AS）之间，负责在数百万条路由前缀中选择最优路径。当前广泛使用的版本为 BGP-4（RFC 4271），支持 CIDR 无类域间路由和路由聚合。</p>
+          <p>在大型企业网络中，BGP 承担着多数据中心互联、多ISP出口负载均衡及跨地域骨干网路由的核心职责。</p>
+
+          <h2>二、核心概念与基本原理</h2>
+          <h3>2.1 自治系统（AS）</h3>
+          <p>AS 是由同一管理机构控制的一组路由器的集合。BGP 在 AS 之间运行（eBGP），也在 AS 内部运行（iBGP）。每个 AS 拥有唯一的 AS 号（ASN），由 IANA 统一分配，范围从 1 到 4294967295。</p>
+
+          <h3>2.2 路径向量协议</h3>
+          <p>BGP 属于路径向量协议，在路由更新中携带完整的 AS 路径信息。接收方通过检查 AS 路径来防止路由环路——如果发现自己的 AS 号已出现在路径中，则丢弃该更新。</p>
+
+          <h3>2.3 BGP 状态机</h3>
+          <p>BGP 对等体在建立连接的过程中经历严格的状态转换，确保双方能够稳定交换路由信息。</p>
+          <table class="doc-table">
+            <tr><th>状态</th><th>描述</th><th>关键动作</th></tr>
+            <tr><td>Idle</td><td>初始状态，等待启动事件</td><td>初始化 TCP 连接资源</td></tr>
+            <tr><td>Connect</td><td>尝试建立 TCP 连接</td><td>三次握手，等待完成</td></tr>
+            <tr><td>Active</td><td>TCP 连接失败后重试</td><td>重新发起 Connect</td></tr>
+            <tr><td>OpenSent</td><td>已发送 OPEN 报文</td><td>等待对端 OPEN 响应</td></tr>
+            <tr><td>OpenConfirm</td><td>收到 OPEN，等待 Keepalive</td><td>验证参数兼容性</td></tr>
+            <tr><td>Established</td><td>会话建立完成</td><td>交换 UPDATE 路由信息</td></tr>
+          </table>
+
+          <h2>三、路由决策与路径选择</h2>
+          <p>BGP 使用多步决策算法在到达同一目的地的多条路径中选择最优路径。决策顺序如下：</p>
+
+          <h3>3.1 BGP 选路属性优先级</h3>
+          <table class="doc-table">
+            <tr><th>优先级</th><th>属性</th><th>说明</th></tr>
+            <tr><td>1</td><td>Weight（Cisco 私有）</td><td>权重越大越优先，仅本地有效</td></tr>
+            <tr><td>2</td><td>Local Preference</td><td>本地优先级，值越大越优先</td></tr>
+            <tr><td>3</td><td>本地始发路由</td><td>network/aggregate 命令产生</td></tr>
+            <tr><td>4</td><td>AS Path 长度</td><td>路径越短越优先</td></tr>
+            <tr><td>5</td><td>Origin 类型</td><td>IGP &lt; EGP &lt; Incomplete</td></tr>
+            <tr><td>6</td><td>MED（Multi-Exit Discriminator）</td><td>值越小越优先，跨 AS 传递</td></tr>
+          </table>
+
+          <div class="doc-note">
+            <strong>推荐实践：</strong> 在多 ISP 出口场景中，建议使用 Local Preference 控制出站流量方向，使用 MED 或 AS Path Prepending 影响入站流量。
+          </div>
+
+          <h2>四、网络高可用架构设计</h2>
+          <h3>4.1 双活数据中心 BGP 架构</h3>
+          <p>典型双活数据中心通过 BGP 实现流量负载分担与故障自动切换。每个数据中心对外通告相同的 IP 地址段，利用 BGP 选路策略实现就近接入和故障转移。</p>
+
+          <h3>4.2 BFD 快速故障检测</h3>
+          <p>BFD（Bidirectional Forwarding Detection）与 BGP 联动，将故障检测时间从默认的 180 秒（Hold Timer）缩短到亚秒级别，是实现网络高可用的关键技术手段。</p>
+
+          <h3>4.3 Graceful Restart 与 NSR</h3>
+          <p>Graceful Restart 允许 BGP 对等体在控制平面重启期间保持转发平面正常工作，避免路由抖动。NSR（Non-Stop Routing）进一步实现在主备引擎切换时不中断 BGP 会话。</p>
+
+          <div class="doc-note">
+            <strong>关键指标：</strong> 生产环境 BGP 收敛时间应控制在 300ms 以内（含 BFD 检测 + 路由更新 + FIB 下发），建议每月进行一次故障切换演练。
+          </div>
         </div>
+      </div>
+      <div class="doc-footer">
+        <span>内部文档中心 · 网络架构组 · 版权所有</span>
+        <span>最后保存：2026-09-15 15:42</span>
       </div>
     `;
 
@@ -1257,7 +1421,7 @@
       updateThemeButtonIcon(themeBtn, isDark);
     });
 
-    // (3) 可视化摸鱼键（终端命令行代码图标 >_ ）
+    // (3) 摸鱼键（技术文档伪装按钮）
     const bossBtn = document.createElement('button');
     bossBtn.id = 'zh-clean-boss-btn';
     bossBtn.className = 'zh-action-btn';
@@ -1272,7 +1436,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
           快捷操作
         </div>
-        <div class="zh-guide-item"><span><kbd>Esc</kbd></span><span>老板键 (代码掩护)</span></div>
+        <div class="zh-guide-item"><span><kbd>Esc</kbd></span><span>老板键 (技术文档掩护)</span></div>
         <div class="zh-guide-tip">（其余功能请点击下方按钮操作）</div>
       </div>
     `;
