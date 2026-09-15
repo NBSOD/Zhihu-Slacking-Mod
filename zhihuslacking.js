@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         知乎极简沉浸纯净阅读与摸鱼防窥版-个人修改版
 // @namespace    https://github.com/NBSOD/Zhihu-Slacking-Mod
-// @version      1.0.3
+// @version      1.0.4
 // @description  基于原脚本「知乎极简沉浸 - 纯净阅读与摸鱼防窥版」改写：宽屏自适应(1100px)、仅保留 Esc 老板键。全站去顶栏/侧栏/广告/看山/操作条；彻底消灭丑陋白底骨架屏；回答时间自动置顶；问答页黑底白字平铺；消灭知乎页签图标；评论详情与楼中楼弹窗全黑夜化；顶部极简搜索栏；图片模糊防窥；右侧4浮钮；配备技术网站文章全屏伪装（按Esc或点击>_键触发）
 // @author       Suepr_FFF, Deepseek-v4-Pro
 // @match        https://www.zhihu.com/*
@@ -259,8 +259,8 @@
     }
 
     html:not(.zh-dark-mode) #zh-clean-searchbar-wrapper {
-      background: rgba(245, 247, 250, 0.85) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+      background: rgba(244, 245, 245, 0.85) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
     }
 
     html.zh-dark-mode #zh-clean-searchbar-wrapper {
@@ -483,31 +483,32 @@
 
     .RichText p, .Post-RichTextContainer p { margin: 1.2em 0 !important; }
 
-    /* === 8. 白天模式 === */
+    /* === 8. 白天模式（技术社区风格） === */
     html:not(.zh-dark-mode), html:not(.zh-dark-mode) body {
-      background-color: #f5f7fa !important;
-      color: #2c323b !important;
+      background-color: #f4f5f5 !important;
+      color: #3c3d40 !important;
     }
 
     html:not(.zh-dark-mode) .QuestionHeader-title,
     html:not(.zh-dark-mode) .Post-Title,
     html:not(.zh-dark-mode) .ContentItem-title,
     html:not(.zh-dark-mode) .ContentItem-title a {
-      color: #1a1d21 !important;
+      color: #1d2129 !important;
     }
 
     html:not(.zh-dark-mode) .Topstory-mainColumn .Card,
     html:not(.zh-dark-mode) .SearchResult-Card {
       background: #ffffff !important;
-      border: 1px solid rgba(0, 0, 0, 0.03) !important;
-      box-shadow: 0 2px 12px rgba(0, 15, 40, 0.04) !important;
+      border: 1px solid #e5e6eb !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+      border-radius: 4px !important;
     }
 
     html:not(.zh-dark-mode) .RichContent,
     html:not(.zh-dark-mode) .RichText,
     html:not(.zh-dark-mode) .Post-RichTextContainer,
     html:not(.zh-dark-mode) .Post-RichTextContainer * {
-      color: #303742 !important;
+      color: #3c3d40 !important;
     }
 
     /* === 9. 黑夜模式 === */
@@ -921,7 +922,6 @@
       padding: 28px 48px 40px !important;
       overflow-y: auto !important;
       line-height: 1.85 !important;
-      max-width: 780px !important;
     }
     .doc-content h2 {
       font-size: 20px !important;
