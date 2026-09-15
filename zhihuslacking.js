@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         知乎极简沉浸纯净阅读与摸鱼防窥版-个人修改版
 // @namespace    https://github.com/NBSOD/Zhihu-Slacking-Mod
-// @version      1.0.0
+// @version      1.0.1
 // @description  基于原脚本「知乎极简沉浸 - 纯净阅读与摸鱼防窥版」改写：宽屏自适应(1100px)、仅保留 Esc 老板键。全站去顶栏/侧栏/广告/看山/操作条；彻底消灭丑陋白底骨架屏；回答时间自动置顶；问答页黑底白字平铺；消灭知乎页签图标；评论详情与楼中楼弹窗全黑夜化；顶部极简搜索栏；图片模糊防窥；右侧4浮钮；配备1:1像素级高保真VS Code代码编辑器全屏掩护
 // @author       Suepr_FFF, Deepseek-v4-Pro
 // @match        https://www.zhihu.com/*
