@@ -14,6 +14,35 @@
 // @updateURL https://update.greasyfork.org/scripts/594124/%E7%9F%A5%E4%B9%8E%E6%9E%81%E7%AE%80%E6%B2%89%E6%B5%B8%20-%20%E7%BA%AF%E5%87%80%E9%98%85%E8%AF%BB%E4%B8%8E%E6%91%B8%E9%B1%BC%E9%98%B2%E7%AA%A5%E7%89%88.meta.js
 // ==/UserScript==
 
+/*
+ * MIT License
+ *
+ * 原始脚本 Copyright (c) 原作者 (GreasyFork 用户 zhihu-minimal-stealth)
+ *   原始地址: https://greasyfork.org/zh-CN/scripts/594124
+ *   原始版本: v6.1.1
+ *
+ * 修改版 Copyright (c) 2026 NBSOD (KevinZ)
+ *   修改内容: 宽屏自适应(1100px)、精简键盘快捷键仅保留 Esc
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 (function () {
   'use strict';
 
