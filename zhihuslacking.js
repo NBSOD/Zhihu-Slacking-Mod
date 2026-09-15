@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         知乎极简沉浸纯净阅读与摸鱼防窥版-个人修改版
 // @namespace    https://github.com/NBSOD/Zhihu-Slacking-Mod
-// @version      1.0.5
+// @version      1.0.6
 // @description  基于原脚本「知乎极简沉浸 - 纯净阅读与摸鱼防窥版」改写：宽屏自适应(1100px)、仅保留 Esc 老板键。全站去顶栏/侧栏/广告/看山/操作条；彻底消灭丑陋白底骨架屏；回答时间自动置顶；问答页黑底白字平铺；消灭知乎页签图标；评论详情与楼中楼弹窗全黑夜化；顶部极简搜索栏；图片模糊防窥；右侧4浮钮；配备技术网站文章全屏伪装（按Esc或点击>_键触发）
 // @author       Suepr_FFF, Deepseek-v4-Pro
 // @match        https://www.zhihu.com/*
@@ -1052,6 +1052,9 @@
   headObserver.observe(document.head, { childList: true });
 
   // 3. 回答时间自动置顶到回答头部（作者信息下方）
+  // 使用 WeakSet 跟踪已处理节点，避免重复 DOM 操作与知乎 React 渲染冲突
+  const hoistProcessedItems = new WeakSet();
+
   function formatIsoDate(isoStr) {
     if (!isoStr) return '';
     try {
@@ -1071,6 +1074,8 @@
   function hoistAllAnswerTimes() {
     const answers = document.querySelectorAll('.ContentItem.AnswerItem, .TopstoryItem');
     answers.forEach(item => {
+      if (hoistProcessedItems.has(item)) return;
+
       let timeEl = item.querySelector('.ContentItem-time');
       const metaCreated = item.querySelector('meta[itemprop="dateCreated"]')?.getAttribute('content');
       const metaModified = item.querySelector('meta[itemprop="dateModified"]')?.getAttribute('content');
@@ -1087,7 +1092,10 @@
       }
 
       if (!timeEl) return;
-      if (timeEl.classList.contains('zh-hoisted-time')) return;
+      if (timeEl.classList.contains('zh-hoisted-time')) {
+        hoistProcessedItems.add(item);
+        return;
+      }
 
       timeEl.classList.add('zh-hoisted-time');
 
@@ -1102,6 +1110,7 @@
       } else if (meta) {
         meta.appendChild(timeEl);
       }
+      hoistProcessedItems.add(item);
     });
   }
 
@@ -1488,24 +1497,26 @@
     hoistAllAnswerTimes();
   }
 
-  // 监听 DOM 变动与单页路由切换（debounce 防止高频触发导致滚动跳动）
+  // 监听 DOM 变动与单页路由切换（debounce + rAF 防止与知乎 React 渲染争抢导致闪白）
   let observerTimer = null;
   const observer = new MutationObserver(() => {
     if (observerTimer) return;
     observerTimer = setTimeout(() => {
-      purgeAllAds();
-      purgeAndLockFavicons();
-      hoistAllAnswerTimes();
-      if (!document.getElementById('zh-clean-searchbar-wrapper')) {
-        insertSearchBar();
-      }
-      if (!document.getElementById('zh-floating-actions') && document.body) {
-        insertFloatingActions();
-      }
-      if (!document.getElementById('zh-boss-mask') && document.body) {
-        initBossMask();
-      }
-      observerTimer = null;
+      requestAnimationFrame(() => {
+        purgeAllAds();
+        purgeAndLockFavicons();
+        hoistAllAnswerTimes();
+        if (!document.getElementById('zh-clean-searchbar-wrapper')) {
+          insertSearchBar();
+        }
+        if (!document.getElementById('zh-floating-actions') && document.body) {
+          insertFloatingActions();
+        }
+        if (!document.getElementById('zh-boss-mask') && document.body) {
+          initBossMask();
+        }
+        observerTimer = null;
+      });
     }, 200);
   });
   observer.observe(document.documentElement, { childList: true, subtree: true });
